@@ -1,4 +1,4 @@
-package bouncingballs;
+package flyingballs;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -7,7 +7,7 @@ import javax.swing.JFrame;
  *
  * @author Korn, Andreas Manuel & García Socias, Alberto 
  */
-public class BouncingBalls {
+public class FlyingBalls {
 
     /**
      * @param args the command line arguments

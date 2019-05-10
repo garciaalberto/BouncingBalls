@@ -1,4 +1,4 @@
-package bouncingballs;
+package flyingballs;
 
 import java.util.Arrays;
 

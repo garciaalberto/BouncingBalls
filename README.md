@@ -1,2 +1,2 @@
-# BouncingBalls
+# FlyingBalls
 Project for class
