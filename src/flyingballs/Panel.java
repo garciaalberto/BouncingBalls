@@ -4,6 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -11,14 +13,16 @@ import javax.swing.JPanel;
  *
  * @authors Korn, Andreas Manuel & García Socias, Alberto 
  */
-public class Panel extends JPanel{
+public class Panel extends JPanel implements MouseMotionListener{
     
     ArrayList<Ball> balls;
     private final int width = 1000;
     private final int height = 500;
+    int mouseX, mouseY;
 
     public Panel() {
         this.balls = new ArrayList<>();
+        addMouseMotionListener(this);
     }
     
     @Override
@@ -38,8 +42,9 @@ public class Panel extends JPanel{
     public void move(){
         for (Ball ball : balls){
             boolean walls = false;
+            boolean followMouse = true;
             
-            if(walls){
+            if(walls && !followMouse){
                 if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
                     ball.getAngle().setX(1);
                 } else if (ball.getPosition().getX() + ball.getAngle().getX() > width - ball.getDiameter()){
@@ -50,7 +55,8 @@ public class Panel extends JPanel{
                     ball.getAngle().setY(-1);
                 }
                 ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());
-            } else{
+            }
+            if (!walls && !followMouse){
                 if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
                     ball.getPosition().setX(width-ball.getPosition().getX());
                 } else if (ball.getPosition().getX() + ball.getAngle().getX() > width - ball.getDiameter()){
@@ -62,10 +68,45 @@ public class Panel extends JPanel{
                 }
                 ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());
             }
+            if(!walls && followMouse){
+                if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
+                    ball.getPosition().setX(width-ball.getPosition().getX());
+                } else if (ball.getPosition().getX() + ball.getAngle().getX() > width - ball.getDiameter()){
+                    ball.getPosition().setX(0);
+                } else if(ball.getPosition().getY() + ball.getAngle().getY() < 0){
+                    ball.getPosition().setY(height-ball.getPosition().getY());
+                } else if (ball.getPosition().getY() + ball.getAngle().getY() > height - ball.getDiameter()){
+                    ball.getPosition().setY(0);
+                }
+                if(ball.getPosition().getX() > mouseX && ball.getPosition().getY() > mouseY){
+                    ball.getPosition().substract(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());
+                }
+                if(ball.getPosition().getX() < mouseX && ball.getPosition().getY() < mouseY){
+                    ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());
+                }
+                if(ball.getPosition().getX() < mouseX && ball.getPosition().getY() > mouseY){
+                    ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), -ball.getAngle().getY()*ball.getSpeed());
+                }
+                if(ball.getPosition().getX() > mouseX && ball.getPosition().getY() < mouseY){
+                    ball.getPosition().add(-ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());
+                }
+            }
         }
     }
     
     public void addBall(Ball ball) {
         balls.add(ball);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
     }
 }

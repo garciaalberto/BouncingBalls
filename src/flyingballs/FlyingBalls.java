@@ -28,11 +28,11 @@ public class FlyingBalls {
         
         MainFrame.add(panel);
         MainFrame.setVisible(true);
-        
-        //JCheckBox CollisionActivated = new JCheckBox("Collision");
-        //MainFrame.add(CollisionActivated);
-        //MainFrame.setVisible(true);
-        
+        /*
+        JCheckBox CollisionActivated = new JCheckBox("With walls");
+        MainFrame.add(CollisionActivated);
+        MainFrame.setVisible(true);
+        */
         MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
