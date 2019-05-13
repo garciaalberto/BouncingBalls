@@ -20,17 +20,11 @@ public class FlyingBalls {
         
         Panel panel = new Panel();
         
-        Ball ball1 = new Ball();
-        Ball ball2 = new Ball();
-        Ball ball3 = new Ball();
-        Ball ball4 = new Ball();
-        Ball ball5 = new Ball();
-        
-        panel.addBall(ball1);
-        panel.addBall(ball2);
-        panel.addBall(ball3);
-        panel.addBall(ball4);
-        panel.addBall(ball5);
+        Ball ball;
+        for(int i = 0; i < 10; i++){
+            ball = new Ball();
+            panel.addBall(ball);
+        }
         
         MainFrame.add(panel);
         MainFrame.setVisible(true);

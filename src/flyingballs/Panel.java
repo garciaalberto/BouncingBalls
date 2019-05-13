@@ -37,16 +37,31 @@ public class Panel extends JPanel{
     
     public void move(){
         for (Ball ball : balls){
-            if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
-                ball.getAngle().setX(1);
-            } else if (ball.getPosition().getX() + ball.getAngle().getX() > width - ball.getDiameter()){
-                ball.getAngle().setX(-1);
-            } else if(ball.getPosition().getY() + ball.getAngle().getY() < 0){
-                ball.getAngle().setY(1);
-            } else if (ball.getPosition().getY() + ball.getAngle().getY() > height - ball.getDiameter()){
-                ball.getAngle().setY(-1);
+            boolean walls = false;
+            
+            if(walls){
+                if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
+                    ball.getAngle().setX(1);
+                } else if (ball.getPosition().getX() + ball.getAngle().getX() > width - ball.getDiameter()){
+                    ball.getAngle().setX(-1);
+                } else if(ball.getPosition().getY() + ball.getAngle().getY() < 0){
+                    ball.getAngle().setY(1);
+                } else if (ball.getPosition().getY() + ball.getAngle().getY() > height - ball.getDiameter()){
+                    ball.getAngle().setY(-1);
+                }
+                ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());
+            } else{
+                if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
+                    ball.getPosition().setX(width-ball.getPosition().getX());
+                } else if (ball.getPosition().getX() + ball.getAngle().getX() > width - ball.getDiameter()){
+                    ball.getPosition().setX(0);
+                } else if(ball.getPosition().getY() + ball.getAngle().getY() < 0){
+                    ball.getPosition().setY(height-ball.getPosition().getY());
+                } else if (ball.getPosition().getY() + ball.getAngle().getY() > height - ball.getDiameter()){
+                    ball.getPosition().setY(0);
+                }
+                ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());
             }
-            ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());   
         }
     }
     
