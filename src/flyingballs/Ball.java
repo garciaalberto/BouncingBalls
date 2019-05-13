@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Ball {
     private final int diameter = 35;
     private final String shape = "Circle";
-    private float[] color;
+    private int[] color = new int[3];
     private int speed;
     private int acceleration;
     private final Vector position, angle;
@@ -26,7 +26,7 @@ public class Ball {
         return shape;
     }
 
-    public float[] getColor() {
+    public int[] getColor() {
         return color;
     }
 
@@ -55,8 +55,9 @@ public class Ball {
         this.speed = 5;
         this.acceleration = 1;
         this.angle = new Vector(1,1);
-        //float color[] = {(float) Math.random(),(float) Math.random(),(float) Math.random()};
-        //this.color = Arrays.copyOf(color, 3);
+        color[0] = (int)Math.floor(Math.random() * 256);
+        color[1] = (int)Math.floor(Math.random() * 256);
+        color[2] = (int)Math.floor(Math.random() * 256);
     }
     
     private float randomizeRGBNumber(){

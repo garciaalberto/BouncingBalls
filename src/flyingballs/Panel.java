@@ -19,7 +19,7 @@ public class Panel extends JPanel{
         setSize(1000,500);
         for (Ball ball : balls){
             graph.drawOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
-            graph.setColor(Color.RED);
+            graph.setColor(new Color(ball.getColor()[0],ball.getColor()[1],ball.getColor()[2]));
             graph.fillOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
         }
     }
@@ -35,7 +35,7 @@ public class Panel extends JPanel{
             } else if (ball.getPosition().getY() + ball.getAngle().getY() > 500 - ball.getDiameter()){
                 ball.getAngle().setY(-1);
             }
-            ball.getPosition().add(ball.getAngle().getX(), ball.getAngle().getY() );   
+            ball.getPosition().add(ball.getAngle().getX()*ball.getSpeed(), ball.getAngle().getY()*ball.getSpeed());   
         }
     }
     
