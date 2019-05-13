@@ -12,7 +12,11 @@ public class Ball {
     private float[] color;
     private int speed;
     private int acceleration;
-    private final Vector position;
+    private final Vector position, angle;
+
+    public Vector getAngle() {
+        return angle;
+    }
     
     public int getDiameter() {
         return diameter;
@@ -50,10 +54,9 @@ public class Ball {
         this.position = new Vector(0,0);
         this.speed = 5;
         this.acceleration = 1;
+        this.angle = new Vector(1,1);
         //float color[] = {(float) Math.random(),(float) Math.random(),(float) Math.random()};
         //this.color = Arrays.copyOf(color, 3);
-        
-        
     }
     
     private float randomizeRGBNumber(){

@@ -26,14 +26,16 @@ public class Panel extends JPanel{
     
     public void move(){
         for (Ball ball : balls){
-            if(ball.getPosition().getY() == 500-ball.getDiameter()){
-                ball.setSpeed(-ball.getSpeed());
+            if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
+                ball.getAngle().setX(1);
+            } else if (ball.getPosition().getX() + ball.getAngle().getX() > 1000 - ball.getDiameter()){
+                ball.getAngle().setX(-1);
+            } else if(ball.getPosition().getY() + ball.getAngle().getY() < 0){
+                ball.getAngle().setY(1);
+            } else if (ball.getPosition().getY() + ball.getAngle().getY() > 500 - ball.getDiameter()){
+                ball.getAngle().setY(-1);
             }
-            if(ball.getPosition().getY() == 200+ball.getDiameter() && ball.getSpeed() < 0){
-                ball.setSpeed(-ball.getSpeed());
-            }
-            ball.getPosition().add(0, ball.getSpeed());
-            
+            ball.getPosition().add(ball.getAngle().getX(), ball.getAngle().getY() );   
         }
     }
     

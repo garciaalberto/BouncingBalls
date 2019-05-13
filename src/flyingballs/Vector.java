@@ -6,6 +6,14 @@ package flyingballs;
  */
 public class Vector {
     private int X, Y;
+
+    public void setX(int X) {
+        this.X = X;
+    }
+
+    public void setY(int Y) {
+        this.Y = Y;
+    }
     
     public Vector(int X, int Y){
         this.X = X;
