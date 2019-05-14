@@ -1,7 +1,14 @@
 package flyingballs;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,8 +22,8 @@ public class FlyingBalls {
      */
     public static void main(String[] args) throws InterruptedException {
         
-        JFrame MainFrame = new JFrame("Flying Balls");
-        MainFrame.setSize(1400, 550);
+        JFrame mainFrame = new JFrame("Flying Balls");
+        mainFrame.setSize(1400, 550);
         
         Panel panel = new Panel();
         
@@ -26,17 +33,21 @@ public class FlyingBalls {
             panel.addBall(ball);
         }
         
-        MainFrame.add(panel);
-        MainFrame.setVisible(true);
-        /*
-        JCheckBox wallsActivated = new JCheckBox("With walls");
-        MainFrame.add(CollisionActivated);
-        MainFrame.setVisible(true);
-        JCheckBox followMouse = new JCheckBox("Follow mouse");
-        MainFrame.add(CollisionActivated);
-        MainFrame.setVisible(true);
-        */
-        MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.add(panel);
+        mainFrame.setVisible(true);
+        
+        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelSuperior.setBackground(Color.GRAY);
+        panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
+        panelSuperior.add(new JLabel("# Balls"));
+        panelSuperior.add(new JFormattedTextField(20));
+        panelSuperior.add(new JCheckBox("With walls"));
+        panelSuperior.add(new JCheckBox("Follow mouse"));
+        mainFrame.add(panelSuperior);
+        
+        mainFrame.getContentPane().add(panelSuperior,BorderLayout.EAST);
+        mainFrame.setVisible(true);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
         while(true){
