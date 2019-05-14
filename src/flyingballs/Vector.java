@@ -38,14 +38,14 @@ public class Vector {
         this.Y -= Y;
     }
     
-    public void multiplyByScalar(double scalar){
-        //this.X = X * scalar;
-        //this.Y = Y * scalar;
+    public void multiplyByScalar(int scalar){
+        this.X = X * scalar;
+        this.Y = Y * scalar;
     }
     
-    public void divisionByScalar(double scalar){
-        //this.X = X/scalar;
-        //this.Y = Y/scalar;
+    public void divisionByScalar(int scalar){
+        this.X = X/scalar;
+        this.Y = Y/scalar;
     }
     
     public double magnitude(){
@@ -53,10 +53,10 @@ public class Vector {
     }
     
     public void unitaryVector(){
-        this.divisionByScalar(this.magnitude());
+        this.divisionByScalar((int)this.magnitude());
     }
     
-    public void limitate(double maximum){
+    public void limitate(int maximum){
         if(this.magnitude() > maximum){
             this.unitaryVector();
             this.divisionByScalar(maximum);

@@ -5,27 +5,23 @@ package flyingballs;
  * @authors Korn, Andreas Manuel & García Socias, Alberto 
  */
 public class Ball {
-    private final int diameter = 35;
-    private final String shape = "Circle";
-    private final int[] color = new int[3];
+    private final int DIAMETER = 35;
+    private final String SHAPE = "Circle";
+    private final int[] COLOR = new int[3];
     private int speed;
     private int acceleration;
-    private final Vector position, angle;
+    private final Vector POSITION, ANGLE;
 
     public Vector getAngle() {
-        return angle;
+        return ANGLE;
     }
     
     public int getDiameter() {
-        return diameter;
-    }
-
-    public String getShape() {
-        return shape;
+        return DIAMETER;
     }
 
     public int[] getColor() {
-        return color;
+        return COLOR;
     }
 
     public int getSpeed() {
@@ -37,7 +33,7 @@ public class Ball {
     }
 
     public Vector getPosition() {
-        return position;
+        return POSITION;
     }
     
     public void setSpeed(int speed) {
@@ -49,12 +45,12 @@ public class Ball {
     }
     
     public Ball(){
-        this.position = new Vector((int)Math.floor(Math.random() * 1000-this.diameter), (int)Math.floor(Math.random() * 500-this.diameter));
-        this.speed = 5;
+        this.POSITION = new Vector((int)Math.floor(Math.random() * 1000-this.DIAMETER), (int)Math.floor(Math.random() * 500-this.DIAMETER));
+        this.speed = 10;
         this.acceleration = 1;
-        this.angle = new Vector(1, 1);
-        color[0] = (int)Math.floor(Math.random() * 256);
-        color[1] = (int)Math.floor(Math.random() * 256);
-        color[2] = (int)Math.floor(Math.random() * 256);
+        this.ANGLE = new Vector(1, 1);
+        COLOR[0] = (int)Math.floor(Math.random() * 256);
+        COLOR[1] = (int)Math.floor(Math.random() * 256);
+        COLOR[2] = (int)Math.floor(Math.random() * 256);
     }
 }
