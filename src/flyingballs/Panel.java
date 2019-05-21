@@ -18,9 +18,21 @@ public class Panel extends JPanel implements MouseMotionListener{
     ArrayList<Ball> balls;
     private final int WIDTH = 1000;
     private final int HEIGHT = 500;
-    int mouseX, mouseY;
+    private int mouseX, mouseY;
+    private boolean walls;
+    private boolean followMouse;
+    
+    public void setWalls(boolean walls) {
+        this.walls = walls;
+    }
+
+    public void setFollowMouse(boolean followMouse) {
+        this.followMouse = followMouse;
+    }
 
     public Panel(int balls) {
+        this.followMouse = false;
+        this.walls = true;
         this.balls = new ArrayList<>();
         addMouseMotionListener(this);
         Ball ball;
@@ -55,8 +67,6 @@ public class Panel extends JPanel implements MouseMotionListener{
     
     public void move(){
         for (Ball ball : balls){
-            boolean walls = true;
-            boolean followMouse = false;
             
             if(walls && !followMouse){
                 if(ball.getPosition().getX() + ball.getAngle().getX() < 0){

@@ -3,11 +3,7 @@ package flyingballs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,8 +37,11 @@ public class FlyingBalls extends JFrame {
         JTextField numberOfBalls = new JTextField("10", 1);
         optionsMenu.add(numberOfBalls);
         
-        optionsMenu.add(new JCheckBox("With walls"));
-        optionsMenu.add(new JCheckBox("Follow mouse"));
+        JCheckBox walls = new JCheckBox("With walls");
+        walls.setSelected(true);
+        optionsMenu.add(walls);
+        JCheckBox followMouse = new JCheckBox("Follow mouse");
+        optionsMenu.add(followMouse);
         
         new FlyingBalls(panel, optionsMenu).setVisible(true);
         
@@ -50,6 +49,8 @@ public class FlyingBalls extends JFrame {
             panel.move();
             panel.repaint();
             Thread.sleep(10);
+            panel.setWalls(walls.isSelected());
+            panel.setFollowMouse(followMouse.isSelected());
             try{
                 if(Integer.parseInt(numberOfBalls.getText())!= balls){
                     balls = Integer.parseInt(numberOfBalls.getText());
