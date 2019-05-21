@@ -41,8 +41,8 @@ public class Panel extends JPanel implements MouseMotionListener{
     
     public void move(){
         for (Ball ball : balls){
-            boolean walls = false;
-            boolean followMouse = true;
+            boolean walls = true;
+            boolean followMouse = false;
             
             if(walls && !followMouse){
                 if(ball.getPosition().getX() + ball.getAngle().getX() < 0){

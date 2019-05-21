@@ -2,28 +2,33 @@ package flyingballs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Korn, Andreas Manuel & García Socias, Alberto 
  */
-public class FlyingBalls {
-
-    /**
-     * @param args the command line arguments
-     * @throws java.lang.InterruptedException
-     */
+public class FlyingBalls extends JFrame {
+    
+    public FlyingBalls(Panel panel, JPanel optionsMenu){
+        setPreferredSize(new Dimension(1300,550));
+        setLayout(new BorderLayout());
+        add(panel, BorderLayout.CENTER);
+        add(optionsMenu, BorderLayout.EAST);
+        pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
     public static void main(String[] args) throws InterruptedException {
-        
-        JFrame mainFrame = new JFrame("Flying Balls");
-        mainFrame.setSize(1400, 550);
         
         Panel panel = new Panel();
         
@@ -32,23 +37,14 @@ public class FlyingBalls {
             ball = new Ball();
             panel.addBall(ball);
         }
+        JPanel optionsMenu = new JPanel();
+        optionsMenu.setBackground(Color.GRAY);
+        optionsMenu.add(new JLabel("# Balls"));
+        optionsMenu.add(new JTextField("10", 1));
+        optionsMenu.add(new JCheckBox("With walls"));
+        optionsMenu.add(new JCheckBox("Follow mouse"));
         
-        mainFrame.add(panel);
-        mainFrame.setVisible(true);
-        
-        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelSuperior.setBackground(Color.GRAY);
-        panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
-        panelSuperior.add(new JLabel("# Balls"));
-        panelSuperior.add(new JFormattedTextField(20));
-        panelSuperior.add(new JCheckBox("With walls"));
-        panelSuperior.add(new JCheckBox("Follow mouse"));
-        mainFrame.add(panelSuperior);
-        
-        mainFrame.getContentPane().add(panelSuperior,BorderLayout.EAST);
-        mainFrame.setVisible(true);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        new FlyingBalls(panel, optionsMenu).setVisible(true);
         
         while(true){
             panel.move();
