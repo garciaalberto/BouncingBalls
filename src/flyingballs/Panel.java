@@ -20,9 +20,23 @@ public class Panel extends JPanel implements MouseMotionListener{
     private final int HEIGHT = 500;
     int mouseX, mouseY;
 
-    public Panel() {
+    public Panel(int balls) {
         this.balls = new ArrayList<>();
         addMouseMotionListener(this);
+        Ball ball;
+        for(int i = 0; i < balls; i++){
+            ball = new Ball();
+            addBall(ball);
+        }
+    }
+    
+    public void reset(int balls){
+        this.balls.clear();
+        Ball ball;
+        for(int i = 0; i < balls; i++){
+            ball = new Ball();
+            addBall(ball);
+        }
     }
     
     @Override

@@ -12,12 +12,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 
 /**
  *
  * @author Korn, Andreas Manuel & García Socias, Alberto 
  */
 public class FlyingBalls extends JFrame {
+    
+    private static int balls = 10;
     
     public FlyingBalls(Panel panel, JPanel optionsMenu){
         setPreferredSize(new Dimension(1300,550));
@@ -28,19 +31,16 @@ public class FlyingBalls extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, BadLocationException {
         
-        Panel panel = new Panel();
+        Panel panel = new Panel(10);
         
-        Ball ball;
-        for(int i = 0; i < 10; i++){
-            ball = new Ball();
-            panel.addBall(ball);
-        }
         JPanel optionsMenu = new JPanel();
         optionsMenu.setBackground(Color.GRAY);
         optionsMenu.add(new JLabel("# Balls"));
-        optionsMenu.add(new JTextField("10", 1));
+        JTextField numberOfBalls = new JTextField("10", 1);
+        optionsMenu.add(numberOfBalls);
+        
         optionsMenu.add(new JCheckBox("With walls"));
         optionsMenu.add(new JCheckBox("Follow mouse"));
         
@@ -50,6 +50,16 @@ public class FlyingBalls extends JFrame {
             panel.move();
             panel.repaint();
             Thread.sleep(10);
+            try{
+                if(Integer.parseInt(numberOfBalls.getText())!= balls){
+                    balls = Integer.parseInt(numberOfBalls.getText());
+                    panel.reset(balls);
+                }
+            }
+            catch(NumberFormatException exception){
+                balls = 0;
+                panel.reset(balls);
+            }
         }
     }
 }
