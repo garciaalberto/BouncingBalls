@@ -57,12 +57,18 @@ public class Panel extends JPanel implements MouseMotionListener{
         Graphics2D g2 = (Graphics2D) graph;
         g2.setStroke(new BasicStroke(5.0f));
         setSize(WIDTH,HEIGHT);
-        for (Ball ball : balls){
-            graph.setColor(Color.BLACK);
-            graph.drawOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
-            graph.setColor(new Color(ball.getColor()[0],ball.getColor()[1],ball.getColor()[2]));
-            graph.fillOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
+        try{
+            for (Ball ball : balls){
+                graph.setColor(Color.BLACK);
+                graph.drawOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
+                graph.setColor(new Color(ball.getColor()[0],ball.getColor()[1],ball.getColor()[2]));
+                graph.fillOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
+            }
         }
+        catch(Exception e){
+            
+        }
+        
     }
     
     public void move(){

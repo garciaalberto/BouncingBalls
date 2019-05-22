@@ -3,6 +3,8 @@ package flyingballs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,15 +34,24 @@ public class FlyingBalls extends JFrame {
         Panel panel = new Panel(10);
         
         JPanel optionsMenu = new JPanel();
-        optionsMenu.setBackground(Color.GRAY);
-        optionsMenu.add(new JLabel("# Balls"));
-        JTextField numberOfBalls = new JTextField("10", 1);
+        optionsMenu.setLayout(new BoxLayout(optionsMenu, 1));
+        optionsMenu.setBackground(Color.LIGHT_GRAY);
+        JLabel label = new JLabel("<html><br><br><br><br><br># Balls</html>");
+        label.setFont(new Font("Arial", 0, 30));
+        optionsMenu.add(label);
+        JTextField numberOfBalls = new JTextField("10", 17);
+        numberOfBalls.setFont(new Font("Arial", 0, 20));
+        numberOfBalls.setMaximumSize(new Dimension(550, 40));
         optionsMenu.add(numberOfBalls);
         
         JCheckBox walls = new JCheckBox("With walls");
+        walls.setFont(new Font("Arial", 0, 20));
         walls.setSelected(true);
+        walls.setBackground(Color.LIGHT_GRAY);
         optionsMenu.add(walls);
         JCheckBox followMouse = new JCheckBox("Follow mouse");
+        followMouse.setFont(new Font("Arial", 0, 20));
+        followMouse.setBackground(Color.LIGHT_GRAY);
         optionsMenu.add(followMouse);
         
         new FlyingBalls(panel, optionsMenu).setVisible(true);
