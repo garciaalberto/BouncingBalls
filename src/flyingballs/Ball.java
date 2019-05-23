@@ -8,8 +8,8 @@ public class Ball {
     private final int DIAMETER = 35;
     private final String SHAPE = "Circle";
     private final int[] COLOR = new int[3];
-    private int speed;
-    private int acceleration;
+    private double speed;
+    private double acceleration;
     private final Vector POSITION, ANGLE;
 
     public Vector getAngle() {
@@ -24,11 +24,11 @@ public class Ball {
         return COLOR;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public int getAcceleration() {
+    public double getAcceleration() {
         return acceleration;
     }
 

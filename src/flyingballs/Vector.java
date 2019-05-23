@@ -5,7 +5,7 @@ package flyingballs;
  * @authors Korn, Andreas Manuel & García Socias, Alberto 
  */
 public class Vector {
-    private int X, Y;
+    private double X, Y;
 
     public void setX(int X) {
         this.X = X;
@@ -20,30 +20,30 @@ public class Vector {
         this.Y = Y;
     }
     
-    public int getX() {
+    public double getX() {
         return X;
     }
 
-    public int getY() {
+    public double getY() {
         return Y;
     }
     
-    public void add(int X, int Y){
+    public void add(double X, double Y){
         this.X += X;
         this.Y += Y;
     }
     
-    public void substract(int X, int Y){
+    public void substract(double X, double Y){
         this.X -= X;
         this.Y -= Y;
     }
     
-    public void multiplyByScalar(int scalar){
+    public void multiplyByScalar(double scalar){
         this.X = X * scalar;
         this.Y = Y * scalar;
     }
     
-    public void divisionByScalar(int scalar){
+    public void divisionByScalar(double scalar){
         this.X = X/scalar;
         this.Y = Y/scalar;
     }
@@ -53,10 +53,10 @@ public class Vector {
     }
     
     public void unitaryVector(){
-        this.divisionByScalar((int)this.magnitude());
+        this.divisionByScalar(this.magnitude());
     }
     
-    public void limitate(int maximum){
+    public void limitate(double maximum){
         if(this.magnitude() > maximum){
             this.unitaryVector();
             this.divisionByScalar(maximum);

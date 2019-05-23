@@ -60,9 +60,9 @@ public class Panel extends JPanel implements MouseMotionListener{
         try{
             for (Ball ball : balls){
                 graph.setColor(Color.BLACK);
-                graph.drawOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
+                graph.drawOval((int)ball.getPosition().getX(), (int)ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
                 graph.setColor(new Color(ball.getColor()[0],ball.getColor()[1],ball.getColor()[2]));
-                graph.fillOval(ball.getPosition().getX(), ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
+                graph.fillOval((int)ball.getPosition().getX(), (int)ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
             }
         }
         catch(Exception e){
@@ -88,11 +88,11 @@ public class Panel extends JPanel implements MouseMotionListener{
             }
             if (!walls && !followMouse){
                 if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
-                    ball.getPosition().setX(WIDTH-ball.getPosition().getX());
+                    ball.getPosition().setX(WIDTH-(int)ball.getPosition().getX());
                 } else if (ball.getPosition().getX() + ball.getAngle().getX() > WIDTH - ball.getDiameter()){
                     ball.getPosition().setX(0);
                 } else if(ball.getPosition().getY() + ball.getAngle().getY() < 0){
-                    ball.getPosition().setY(HEIGHT-ball.getPosition().getY());
+                    ball.getPosition().setY(HEIGHT-(int)ball.getPosition().getY());
                 } else if (ball.getPosition().getY() + ball.getAngle().getY() > HEIGHT - ball.getDiameter()){
                     ball.getPosition().setY(0);
                 }
@@ -100,11 +100,11 @@ public class Panel extends JPanel implements MouseMotionListener{
             }
             if(!walls && followMouse){
                 if(ball.getPosition().getX() + ball.getAngle().getX() < 0){
-                    ball.getPosition().setX(WIDTH-ball.getPosition().getX());
+                    ball.getPosition().setX(WIDTH-(int)ball.getPosition().getX());
                 } else if (ball.getPosition().getX() + ball.getAngle().getX() > WIDTH - ball.getDiameter()){
                     ball.getPosition().setX(0);
                 } else if(ball.getPosition().getY() + ball.getAngle().getY() < 0){
-                    ball.getPosition().setY(HEIGHT-ball.getPosition().getY());
+                    ball.getPosition().setY(HEIGHT-(int)ball.getPosition().getY());
                 } else if (ball.getPosition().getY() + ball.getAngle().getY() > HEIGHT - ball.getDiameter()){
                     ball.getPosition().setY(0);
                 }
