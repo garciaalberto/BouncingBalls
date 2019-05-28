@@ -22,7 +22,7 @@ public class Ball {
         this.acceleration = acceleration;
     }
     
-    public void setAcceleration(int X, int Y){
+    public void setAcceleration(double X, double Y){
         this.acceleration.setX(X);
         this.acceleration.setY(Y);
     }
