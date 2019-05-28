@@ -7,11 +7,11 @@ package flyingballs;
 public class Vector {
     private double X, Y;
 
-    public void setX(int X) {
+    public void setX(double X) {
         this.X = X;
     }
 
-    public void setY(int Y) {
+    public void setY(double Y) {
         this.Y = Y;
     }
     

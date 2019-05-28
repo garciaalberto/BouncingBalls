@@ -18,6 +18,15 @@ public class Ball {
         return acceleration;
     }
     
+    public void setAcceleration(Vector acceleration){
+        this.acceleration = acceleration;
+    }
+    
+    public void setAcceleration(int X, int Y){
+        this.acceleration.setX(X);
+        this.acceleration.setY(Y);
+    }
+    
     public int getDiameter() {
         return DIAMETER;
     }
@@ -42,6 +51,11 @@ public class Ball {
         this.position = position;
     }
     
+    public void setPosition(double X, double Y){
+        this.position.setX(X);
+        this.position.setY(Y);
+    }
+    
     public void accelerate(){
         this.speed.add(acceleration);
     }
@@ -55,7 +69,7 @@ public class Ball {
     
     public Ball(){
         this.position = new Vector((int)Math.floor(Math.random() * 1000-this.DIAMETER), (int)Math.floor(Math.random() * 500-this.DIAMETER));
-        this.speed = new Vector(1, 10);
+        this.speed = new Vector(-1, 1);
         this.acceleration = new Vector(0, 1);
         COLOR[0] = (int)Math.floor(Math.random() * 256);
         COLOR[1] = (int)Math.floor(Math.random() * 256);
