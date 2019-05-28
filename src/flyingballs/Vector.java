@@ -15,7 +15,7 @@ public class Vector {
         this.Y = Y;
     }
     
-    public Vector(int X, int Y){
+    public Vector(double X, double Y){
         this.X = X;
         this.Y = Y;
     }

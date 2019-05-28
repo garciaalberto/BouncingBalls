@@ -36,11 +36,11 @@ public class Ball {
         return POSITION;
     }
     
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setSpeed(double speed) {
+        this.speed = this.speed*speed;
     }
 
-    public void setAcceleration(int acceleration) {
+    public void setAcceleration(double acceleration) {
         this.acceleration = acceleration;
     }
     
