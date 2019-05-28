@@ -33,6 +33,11 @@ public class Vector {
         this.Y += Y;
     }
     
+    public void add(Vector vec){
+        this.X += vec.X;
+        this.Y += vec.Y;
+    }
+    
     public void substract(double X, double Y){
         this.X -= X;
         this.Y -= Y;
