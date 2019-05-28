@@ -1,5 +1,8 @@
 package flyingballs;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @authors Korn, Andreas Manuel & García Socias, Alberto 
@@ -32,10 +35,6 @@ public class Ball {
         this.speed.add(X, Y);
     }
 
-//    public double getAcceleration() {
-//        return acceleration;
-//    }
-
     public Vector getPosition() {
         return position;
     }
@@ -48,13 +47,12 @@ public class Ball {
         this.speed.add(acceleration);
     }
     
-//    public void setSpeed(Vector speed) {
-//        this.speed = speed;
-//    }
-
-//    public void setAcceleration(double acceleration) {
-//        this.acceleration = acceleration;
-//    }
+    public void paintBall(Graphics graph){
+        graph.setColor(Color.BLACK);
+        graph.drawOval((int) this.getPosition().getX(), (int) this.getPosition().getY(), this.getDiameter(), this.getDiameter());
+        graph.setColor(new Color(this.getColor()[0], this.getColor()[1], this.getColor()[2]));
+        graph.fillOval((int) this.getPosition().getX(), (int) this.getPosition().getY(), this.getDiameter(), this.getDiameter());
+    }
     
     public Ball(){
         this.position = new Vector((int)Math.floor(Math.random() * 1000-this.DIAMETER), (int)Math.floor(Math.random() * 500-this.DIAMETER));

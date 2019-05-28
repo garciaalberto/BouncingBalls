@@ -59,10 +59,7 @@ public class Panel extends JPanel implements MouseMotionListener {
         setSize(WIDTH, HEIGHT);
         try {
             for (Ball ball : balls) {
-                graph.setColor(Color.BLACK);
-                graph.drawOval((int) ball.getPosition().getX(), (int) ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
-                graph.setColor(new Color(ball.getColor()[0], ball.getColor()[1], ball.getColor()[2]));
-                graph.fillOval((int) ball.getPosition().getX(), (int) ball.getPosition().getY(), ball.getDiameter(), ball.getDiameter());
+                ball.paintBall(graph);
             }
         } catch (Exception exception) {
             System.err.println("Be careful playing with so many balls");
