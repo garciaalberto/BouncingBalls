@@ -1,7 +1,6 @@
 package flyingballs;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -85,20 +84,19 @@ public class Panel extends JPanel implements MouseMotionListener {
     }
 
     private void moveWallsNotFollow(Ball ball) {
-        if(ball.getPosition().getX() /*+ ball.getSpeed().getX()*/ < 0){
-            ball.setPosition(new Vector(ball.getPosition().getX(),10));
-        } else if (ball.getPosition().getX()/* + ball.getSpeed().getX()*/ > WIDTH - ball.getDiameter()){
-            ball.setPosition(new Vector(ball.getPosition().getX(),50));
-        } else if(ball.getPosition().getY()/* + ball.getSpeed().getY()*/ < 0){
-//            ball.accelerate();
-            ball.setPosition(new Vector(ball.getPosition().getX(),50));
+        if(ball.getPosition().getX() /*- ball.getDiameter()*/ <= 0){ // Cuando la bola llega a la pared izquierda
+            ball.setSpeed(-2*ball.getSpeed().getX(),0);
+        } else if (ball.getPosition().getX() + ball.getDiameter() /* + ball.getSpeed().getX()*/ >= WIDTH){ // Cuando la bola llega a la pared derecha
+            ball.setSpeed(-2*ball.getSpeed().getX(),0);
+        } else if(ball.getPosition().getY()/* + ball.getSpeed().getY()*/ < 0){ // Cuando la bola llega al techo
+            ball.setSpeed(0, -ball.getSpeed().getY());
         } else if (ball.getPosition().getY() + 2*ball.getDiameter() > HEIGHT){ // Cuando la bola llega abajo
-            ball.setSpeed(0,-10);
+            ball.setSpeed(0, -10);
         }
         if(ball.getSpeed().magnitude() < 50 ){
             ball.accelerate();
+            ball.getPosition().add(ball.getSpeed());
         }
-        ball.getPosition().add(ball.getSpeed());
     }
 
 //    private void moveWallsNotFollow(Ball ball){
@@ -112,7 +110,7 @@ public class Panel extends JPanel implements MouseMotionListener {
 //            ball.getAcceleration().setY(-1);
 //        }
 //        bal
-////        ball.getPosition().add( ball.getAcceleration().getX()*ball.getSpeed() , ball.getAcceleration().getY()*ball.getSpeed());
+//        ball.getPosition().add( ball.getAcceleration().getX()*ball.getSpeed() , ball.getAcceleration().getY()*ball.getSpeed());
 //    }
 //    private void moveNotWallsNotFollow(Ball ball){
 //        if(ball.getPosition().getX() + ball.getAcceleration().getX() < 0){

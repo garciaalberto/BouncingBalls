@@ -12,7 +12,6 @@ public class Ball {
     private final String SHAPE = "Circle";
     private final int[] COLOR = new int[3];
     private Vector speed;
-//    private double acceleration;
     private Vector position, acceleration;
 
     public Vector getAcceleration() {
@@ -57,7 +56,6 @@ public class Ball {
     public Ball(){
         this.position = new Vector((int)Math.floor(Math.random() * 1000-this.DIAMETER), (int)Math.floor(Math.random() * 500-this.DIAMETER));
         this.speed = new Vector(1, 10);
-//        this.acceleration = 1;
         this.acceleration = new Vector(0, 1);
         COLOR[0] = (int)Math.floor(Math.random() * 256);
         COLOR[1] = (int)Math.floor(Math.random() * 256);
