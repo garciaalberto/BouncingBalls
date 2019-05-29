@@ -71,11 +71,11 @@ public class Ball {
         this.position = new Vector((int)Math.floor(Math.random() * (1000-this.DIAMETER)), (int)Math.floor(Math.random() * (500-this.DIAMETER)));
         double xSpd = Math.random()*2-1;
         if(xSpd<0){
-            xSpd = -1;
+            xSpd = -0.5;
         } else {
-            xSpd = 1;
+            xSpd = 0.5;
         }
-        this.speed = new Vector(xSpd, 1);
+        this.speed = new Vector(xSpd, 0.5);
         this.acceleration = new Vector(0, 1);
         COLOR[0] = (int)Math.floor(Math.random() * 256);
         COLOR[1] = (int)Math.floor(Math.random() * 256);

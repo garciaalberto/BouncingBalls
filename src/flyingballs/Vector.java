@@ -53,18 +53,18 @@ public class Vector {
         this.Y = Y/scalar;
     }
     
-    public double magnitude(){
+    public double module(){
         return Math.sqrt(X*X + Y*Y);
     }
     
     public void unitaryVector(){
-        this.divisionByScalar(this.magnitude());
+        this.divisionByScalar(this.module());
     }
     
     public void limitate(double maximum){
-        if(this.magnitude() > maximum){
+        if(this.module() >= maximum){
             this.unitaryVector();
-            this.divisionByScalar(maximum);
+            this.multiplyByScalar(maximum);
         }
     }
 }

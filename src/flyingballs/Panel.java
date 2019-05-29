@@ -135,7 +135,7 @@ public class Panel extends JPanel implements MouseMotionListener {
             ball.setPosition(ball.getPosition().getX(), 0);
         }
         
-        ball.setAcceleration((mouseX-ball.getPosition().getX())/WIDTH,(mouseY-ball.getPosition().getY())/HEIGHT);
+        ball.setAcceleration((mouseX-ball.getPosition().getX())/(2*WIDTH),(mouseY-ball.getPosition().getY())/(2*HEIGHT));
         
         ball.getSpeed().limitate(20);
         ball.accelerate();
