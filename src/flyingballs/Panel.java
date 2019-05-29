@@ -86,6 +86,10 @@ public class Panel extends JPanel implements MouseMotionListener {
     private void moveWallsNotFollow(Ball ball) {
         ball.setAcceleration(0,1);
         
+        if(ball.getSpeed().getX() < 0.5 && ball.getSpeed().getX() > -0.5){
+            ball.getSpeed().setX(0.5); // A veces la velocidad en el eje X es tan pequeña, que la bola parece que no se mueve. Esto se asegura de que sí lo haga.
+        }
+        
         if(ball.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
             ball.setSpeed(5,0);
         } else if (ball.getPosition().getX() + ball.getDiameter() >= WIDTH){ // Cuando la bola llega a la pared derecha
@@ -94,7 +98,7 @@ public class Panel extends JPanel implements MouseMotionListener {
         if(ball.getPosition().getY() <= 0){ // Cuando la bola llega al techo
             ball.setSpeed(0, 5);
         } else if (ball.getPosition().getY() + ball.getDiameter() >= HEIGHT){ // Cuando la bola llega abajo
-            ball.setSpeed(0, -10);
+            ball.setSpeed(0, -5);
         }
         ball.accelerate();
         ball.getSpeed().limitate(30);
@@ -133,7 +137,7 @@ public class Panel extends JPanel implements MouseMotionListener {
         
         ball.setAcceleration((mouseX-ball.getPosition().getX())/WIDTH,(mouseY-ball.getPosition().getY())/HEIGHT);
         
-        ball.getSpeed().limitate(10);
+        ball.getSpeed().limitate(20);
         ball.accelerate();
         ball.getPosition().add(ball.getSpeed());
     }
@@ -152,14 +156,14 @@ public class Panel extends JPanel implements MouseMotionListener {
         ball.setAcceleration((mouseX-ball.getPosition().getX())/WIDTH,(mouseY-ball.getPosition().getY())/HEIGHT);
 
         ball.accelerate();
-        ball.getSpeed().limitate(10);
+        ball.getSpeed().limitate(20);
         ball.getPosition().add(ball.getSpeed());
     }
     
     public void addBall(Ball ball) {
         balls.add(ball);
     }
-
+    
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseX = e.getX();
