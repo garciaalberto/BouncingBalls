@@ -80,4 +80,96 @@ public class Ball {
         COLOR[1] = (int)Math.floor(Math.random() * 256);
         COLOR[2] = (int)Math.floor(Math.random() * 256);
     }
+    
+    private void moveWallsNotFollow() {
+        this.setAcceleration(0,1);
+        
+        if(this.getSpeed().getX() < 0.5 && this.getSpeed().getX() > -0.5){
+            this.getSpeed().setX(0.5); // A veces la velocidad en el eje X es tan pequeña, que la bola parece que no se mueve. Esto se asegura de que sí lo haga.
+        }
+        
+        if(this.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
+            this.setSpeed(5,0);
+        } else if (this.getPosition().getX() + this.getDiameter() >= Panel.getWIDTH()){ // Cuando la bola llega a la pared derecha
+            this.setSpeed(-5,0);
+        } 
+        if(this.getPosition().getY() <= 0){ // Cuando la bola llega al techo
+            this.setSpeed(0, 5);
+        } else if (this.getPosition().getY() + this.getDiameter() >= Panel.getHEIGHT()){ // Cuando la bola llega abajo
+            this.setSpeed(0, -5);
+        }
+        this.accelerate();
+        this.getSpeed().limitate(20);
+        this.getPosition().add(this.getSpeed());
+    }
+    
+    private void moveNotWallsNotFollow() {
+        this.setAcceleration(0,1);
+
+        if(this.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
+            this.setPosition(Panel.getWIDTH() - this.getDiameter(), this.getPosition().getY());
+        } else if (this.getPosition().getX() + this.getDiameter() >= Panel.getWIDTH()){ // Cuando la bola llega a la pared derecha
+            this.setPosition(0, this.getPosition().getY());
+        } 
+        if(this.getPosition().getY() < 0){ // Cuando la bola llega al techo
+            this.setPosition(this.getPosition().getX(), Panel.getHEIGHT() - this.getDiameter());
+        } else if (this.getPosition().getY() + this.getDiameter() >= Panel.getHEIGHT()){ // Cuando la bola llega abajo
+            this.setPosition(this.getPosition().getX(), 0);
+        }
+        this.accelerate();
+        this.getSpeed().limitate(10);
+        this.getPosition().add(this.getSpeed());
+    }
+    
+    private void moveNotWallsFollow(Vector mousePosition){
+        if(this.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
+            this.setPosition(Panel.getWIDTH() - this.getDiameter(), this.getPosition().getY());
+        } else if (this.getPosition().getX() + this.getDiameter() >= Panel.getWIDTH()){ // Cuando la bola llega a la pared derecha
+            this.setPosition(0, this.getPosition().getY());
+        } 
+        if(this.getPosition().getY() < 0){ // Cuando la bola llega al techo
+            this.setPosition(this.getPosition().getX(), Panel.getHEIGHT() - this.getDiameter());
+        } else if (this.getPosition().getY() + this.getDiameter() >= Panel.getHEIGHT()){ // Cuando la bola llega abajo
+            this.setPosition(this.getPosition().getX(), 0);
+        }
+        
+        this.setAcceleration(((int)mousePosition.getX()-this.getPosition().getX())/(2*Panel.getWIDTH()),((int)mousePosition.getY()-this.getPosition().getY())/(2*Panel.getHEIGHT()));
+        
+        this.getSpeed().limitate(5);
+        this.accelerate();
+        this.getPosition().add(this.getSpeed());
+    }
+    
+    private void moveWallsFollow(Vector mousePosition){
+        if(this.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
+            this.setSpeed(1,0);
+        } else if (this.getPosition().getX() + this.getDiameter() >= Panel.getWIDTH()){ // Cuando la bola llega a la pared derecha
+            this.setSpeed(-1,0);
+        } else if(this.getPosition().getY() <= 0){ // Cuando la bola llega al techo
+            this.setSpeed(0, 1);
+        } else if (this.getPosition().getY() + this.getDiameter() >= Panel.getHEIGHT()){ // Cuando la bola llega abajo
+            this.setSpeed(0, -1);
+        }
+        
+        this.setAcceleration(((int)mousePosition.getX()-this.getPosition().getX())/(2*Panel.getWIDTH()),((int)mousePosition.getY()-this.getPosition().getY())/(2*Panel.getHEIGHT()));
+
+        this.accelerate();
+        this.getSpeed().limitate(5);
+        this.getPosition().add(this.getSpeed());
+    }
+    
+    public void move(boolean walls, boolean followMouse, Vector mousePosition){ // Se encarga del movimiento de las bolas en función de los flags walls y followMouse
+        if (walls && !followMouse) {
+            moveWallsNotFollow();
+        }
+        if (!walls && !followMouse){
+            moveNotWallsNotFollow();
+        }
+        if(!walls && followMouse){
+            moveNotWallsFollow(mousePosition);
+        }
+        if(walls && followMouse){
+            moveWallsFollow(mousePosition);
+        }
+    }
 }

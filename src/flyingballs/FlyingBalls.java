@@ -56,7 +56,6 @@ public class FlyingBalls extends JFrame { // FlyingBalls hereda de la clase JFra
         new FlyingBalls(panel, optionsMenu).setVisible(true); // Creacion del JFrame con los dos paneles
         
         while(true){
-            panel.move(); // Llamamos al movimiento de las bolas
             panel.repaint(); // Hacemos un repaint de las bolas en sus nuevas posiciones
             Thread.sleep(10); // Dejamos reposar por 10 microsegundos
             panel.setWalls(walls.isSelected()); // Damos a walls el valor que tenía anteriormente
