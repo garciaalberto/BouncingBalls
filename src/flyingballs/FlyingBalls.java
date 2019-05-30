@@ -21,7 +21,7 @@ public class FlyingBalls extends JFrame {
     private static int balls = 10;
     
     public FlyingBalls(Panel panel, JPanel optionsMenu){
-        setPreferredSize(new Dimension(1300,500));
+        setPreferredSize(new Dimension(1300,540));
         setLayout(new BorderLayout());
         add(panel, BorderLayout.CENTER);
         add(optionsMenu, BorderLayout.EAST);

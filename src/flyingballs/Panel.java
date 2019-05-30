@@ -101,7 +101,7 @@ public class Panel extends JPanel implements MouseMotionListener {
             ball.setSpeed(0, -5);
         }
         ball.accelerate();
-        ball.getSpeed().limitate(30);
+        ball.getSpeed().limitate(20);
         ball.getPosition().add(ball.getSpeed());
     }
     
@@ -119,7 +119,7 @@ public class Panel extends JPanel implements MouseMotionListener {
             ball.setPosition(ball.getPosition().getX(), 0);
         }
         ball.accelerate();
-        ball.getSpeed().limitate(30);
+        ball.getSpeed().limitate(10);
         ball.getPosition().add(ball.getSpeed());
     }
     
@@ -137,7 +137,7 @@ public class Panel extends JPanel implements MouseMotionListener {
         
         ball.setAcceleration((mouseX-ball.getPosition().getX())/(2*WIDTH),(mouseY-ball.getPosition().getY())/(2*HEIGHT));
         
-        ball.getSpeed().limitate(20);
+        ball.getSpeed().limitate(5);
         ball.accelerate();
         ball.getPosition().add(ball.getSpeed());
     }
@@ -153,10 +153,10 @@ public class Panel extends JPanel implements MouseMotionListener {
             ball.setSpeed(0, -1);
         }
         
-        ball.setAcceleration((mouseX-ball.getPosition().getX())/WIDTH,(mouseY-ball.getPosition().getY())/HEIGHT);
+        ball.setAcceleration((mouseX-ball.getPosition().getX())/(2*WIDTH),(mouseY-ball.getPosition().getY())/(2*HEIGHT));
 
         ball.accelerate();
-        ball.getSpeed().limitate(20);
+        ball.getSpeed().limitate(5);
         ball.getPosition().add(ball.getSpeed());
     }
     
