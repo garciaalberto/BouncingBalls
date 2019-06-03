@@ -80,13 +80,13 @@ public class Panel extends JPanel implements MouseMotionListener { // Panel here
     }
     
     @Override
-    public void mouseDragged(MouseEvent e) { // Implementación del método mouseDragged de la interfaz MouseMovementListener
+    public void mouseDragged(MouseEvent event) { // Implementación del método mouseDragged de la interfaz MouseMovementListener
         // No tiene utilidad pero necesita ser creado para implementar correctamente la interfaz MouseMovementListener
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) { // Implementación del método mouseMoved de la interfaz MouseMovementListener
-        mousePosition.setX(e.getX()); // Cuando se mueve el ratón cambia las posiciones del vector mousePosition
-        mousePosition.setY(e.getY());
+    public void mouseMoved(MouseEvent event) { // Implementación del método mouseMoved de la interfaz MouseMovementListener
+        mousePosition.setX(event.getX()); // Cuando se mueve el ratón cambia las posiciones del vector mousePosition
+        mousePosition.setY(event.getY());
     }
 }

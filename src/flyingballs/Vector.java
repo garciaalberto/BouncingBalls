@@ -33,9 +33,9 @@ public class Vector { // Clase Vector, se encargará de la representación bidim
         this.Y += Y;
     }
     
-    public void add(Vector vec){ // Suma vectorial
-        this.X += vec.X;
-        this.Y += vec.Y;
+    public void add(Vector vector){ // Suma vectorial
+        this.X += vector.X;
+        this.Y += vector.Y;
     }
     
     public void substract(double X, double Y){ // Resta vectorial con dos doubles representando la X y la Y a restar

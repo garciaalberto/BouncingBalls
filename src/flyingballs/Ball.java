@@ -13,25 +13,25 @@ public class Ball {
     private final int[] COLOR = new int[3]; // Indica el color de la bola con tres valores Integer (R, G y B)
     private Vector speed, position, acceleration; // Indica los vectores de velocidad, posición y aceleración
     
-    public void setAcceleration(Vector acceleration){ // Método que establece la aceleración
+    private void setAcceleration(Vector acceleration){ // Método que establece la aceleración
         this.acceleration = acceleration;
     }
     
-    public void setAcceleration(double X, double Y){ // Overload del método para establecer la aceleración que funciona con dos double
+    private void setAcceleration(double X, double Y){ // Overload del método para establecer la aceleración que funciona con dos double
         this.acceleration.setX(X);
         this.acceleration.setY(Y);
     }
     
-    public void setSpeed(double X, double Y){ // Método para establecer la velocidad de la bola
+    private void setSpeed(double X, double Y){ // Método para establecer la velocidad de la bola
         this.speed.add(X, Y);
     }
     
-    public void setPosition(double X, double Y){ // Overload del método para establecer la posición de la bola con dos double
+    private void setPosition(double X, double Y){ // Overload del método para establecer la posición de la bola con dos double
         this.position.setX(X);
         this.position.setY(Y);
     }
     
-    public void accelerate(){ // Método para acelerar la bola, añade a la velocidad la acceleración
+    private void accelerate(){ // Método para acelerar la bola, añade a la velocidad la acceleración
         this.speed.add(acceleration);
     }
     
