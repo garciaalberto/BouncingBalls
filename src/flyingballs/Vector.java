@@ -53,11 +53,11 @@ public class Vector { // Clase Vector, se encargará de la representación bidim
         this.Y = Y/scalar;
     }
     
-    public double module(){ // Devuelve el valor de la modulo del vector
+    private double module(){ // Devuelve el valor de la modulo del vector
         return Math.sqrt(X*X + Y*Y);
     }
     
-    public void unitaryVector(){ // Hace el vector unitario de el Vector
+    private void unitaryVector(){ // Hace el vector unitario de el Vector
         this.divisionByScalar(this.module());
     }
     
