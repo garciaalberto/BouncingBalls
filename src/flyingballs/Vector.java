@@ -7,61 +7,115 @@ package flyingballs;
 public class Vector { // Clase Vector, se encargará de la representación bidimensional
     private double X, Y; // Indican las dos dimensiones del vector, X para la anchura e Y para la altura
 
-    public void setX(double X) { // Ajusta el valor de X
+    /**
+     * Setter del valor de X
+     * @param X 
+     */
+    public void setX(double X) {
         this.X = X;
     }
 
-    public void setY(double Y) { // Ajusta el valor de Y
+    /**
+     * Setter del valor Y.
+     * @param Y 
+     */
+    public void setY(double Y) {
         this.Y = Y;
     }
     
-    public Vector(double X, double Y){ // Constructor del objeto vector, requiere dos doubles, uno para el valor X y otro para el valor Y
+    /**
+     * Constructor del objeto vector. Recibe por parámetros dos doubles que serán los valores X e Y del vector.
+     * @param X
+     * @param Y 
+     */
+    public Vector(double X, double Y){
         this.X = X;
         this.Y = Y;
     }
     
-    public double getX() { // Devuelve el valor de X
+    /**
+     * Getter del valor X
+     * @return 
+     */
+    public double getX() {
         return X;
     }
 
-    public double getY() { // Devuelve el valor de Y
+    /**
+     * Getter del valor de Y
+     * @return 
+     */
+    public double getY() {
         return Y;
     }
     
-    public void add(double X, double Y){ // Suma vectorial con dos doubles representando la X y la Y a sumar
+    /**
+     * Ejecuta la suma vectorial al vector recibiendo los valores por parámetro.
+     * @param X
+     * @param Y 
+     */
+    public void add(double X, double Y){
         this.X += X;
         this.Y += Y;
     }
     
-    public void add(Vector vector){ // Suma vectorial
+    /**
+     * Ejecuta la suma vectorial al vector que afecta recibiendo el vector a sumar.
+     * @param vector 
+     */
+    public void add(Vector vector){
         this.X += vector.X;
         this.Y += vector.Y;
     }
     
-    public void substract(double X, double Y){ // Resta vectorial con dos doubles representando la X y la Y a restar
+    /**
+     * Ejecuta la resta vectorial al vector recibiendo los valores por parámetro
+     * @param X
+     * @param Y 
+     */
+    public void substract(double X, double Y){
         this.X -= X;
         this.Y -= Y;
     }
     
-    public void multiplyByScalar(double scalar){ // Multiplicación por un escaclar con un double representando el escalar
+    /**
+     * Multiplica el vector por un double recibido por parámetro.
+     * @param scalar 
+     */
+    public void multiplyByScalar(double scalar){
         this.X = X * scalar;
         this.Y = Y * scalar;
     }
     
-    public void divisionByScalar(double scalar){ // División por un escaclar con un double representando el escalar
+    /**
+     * Divide el vector por un double recibido por parámetro.
+     * @param scalar 
+     */
+    public void divisionByScalar(double scalar){
         this.X = X/scalar;
         this.Y = Y/scalar;
     }
     
-    private double module(){ // Devuelve el valor de la modulo del vector
+    /**
+     * Devuelve el módulo del vector.
+     * @return 
+     */
+    private double module(){
         return Math.sqrt(X*X + Y*Y);
     }
     
-    private void unitaryVector(){ // Hace el vector unitario de el Vector
+    /**
+     * Calcula el vector unitario del vector.
+     */
+    private void unitaryVector(){
         this.divisionByScalar(this.module());
     }
     
-    public void limitate(double maximum){ // Limita el vector en función del módulo del vector
+    /**
+     * Limita el vector si el módulo es mayor que el valor recibido por parámetro.
+     * @param maximum 
+     */
+    public void limitate(double maximum){
         if(this.module() >= maximum){
             this.unitaryVector();
             this.multiplyByScalar(maximum);

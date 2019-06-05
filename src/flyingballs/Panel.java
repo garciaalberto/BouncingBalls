@@ -29,19 +29,44 @@ public class Panel extends JPanel implements MouseMotionListener { // Panel here
         return HEIGHT;
     }
 
-    public void setWalls(boolean walls) { // Cambia el valor de walls
+    /**
+     * Cambia el valor del booleano walls al recibido por parámetro.
+     * @param walls 
+     */
+    public void setWalls(boolean walls) { 
         this.walls = walls;
     }
 
-    public void setFollowMouse(boolean followMouse) { // Cambia el valor de followMouse
+    /**
+     * Cambia el valor del bolleano followMouse al recibido por parámetro.
+     * @param followMouse 
+     */
+    public void setFollowMouse(boolean followMouse) {
         this.followMouse = followMouse;
     }
 
-    public Panel(int balls) { // Constructor de la clase panel de bolas, requiere de un integer que serán en número de bolas con el que se empieza
-        this.followMouse = false; // Setea a la configuración básica (No seguir el ratón y rebotar contra las paredes)
+    /**
+     * Constructor de la clase panel de bolas. Recibe por parámetro el número de bolas.
+     * @param balls 
+     */
+    public Panel(int balls) { 
+        this.followMouse = false; // Setea a la configuración por defecto (No seguir el ratón y rebotar contra las paredes)
         this.walls = true;
         this.balls = new ArrayList<>(); // Inicializa el Arraylist de bolas
         addMouseMotionListener(this); // Añade el mouselistener
+        Ball ball; // Crea un objeto bola sin inicializar
+        for (int i = 0; i < balls; i++) { // Inicializa y añade en el array tantas bolas como tenga el int balls
+            ball = new Ball();
+            addBall(ball);
+        }
+    }
+
+    /**
+     * Restablece el panel de bolas. Recibe por parámetro el número de bolas.
+     * @param balls 
+     */
+    public void reset(int balls) {
+        this.balls.clear(); // Vacía el ArrayList
         Ball ball; // Crea un objeto bola sin inicializar
         for (int i = 0; i < balls; i++) { // Inizializa y añade en el array tantas bolas como tenga el int balls
             ball = new Ball();
@@ -49,17 +74,12 @@ public class Panel extends JPanel implements MouseMotionListener { // Panel here
         }
     }
 
-    public void reset(int balls) { // Resetea el panel de bolas, requiere de un integer que serán el nuevo número de bolas
-        this.balls.clear(); // Vacía el ArrayList
-        Ball ball; // Crea un objeto bola sin inicializar
-        for (int i = 0; i < balls; i++) { // Inizializa y aññade en el array tantas bolas como tenga el int balls
-            ball = new Ball();
-            addBall(ball);
-        }
-    }
-
+    /**
+     * Método sobreescrito de su clase padre JPanel, este método se encarga de pintar las bolas
+     * @param graph 
+     */
     @Override
-    public void paint(Graphics graph) { // Método sobreescrito de su clase padre JPanel, este método se encarga de pintar las bolas
+    public void paint(Graphics graph) {
         super.paint(graph); // Usamos el super para que haga un repaint como haría la clase paint de JPanel
         Graphics2D g2 = (Graphics2D) graph; // Y le añadimos nuestras funcionalidades extra
         g2.setStroke(new BasicStroke(5)); // Ajustamos el tamaño de trazo
@@ -75,17 +95,29 @@ public class Panel extends JPanel implements MouseMotionListener { // Panel here
 
     }
 
-    public void addBall(Ball ball) { // Añade un objeto bola al ArrayList de bolas
+    /**
+     * Añade un objeto bola al ArrayList de bolas
+     * @param ball 
+     */
+    public void addBall(Ball ball) {
         balls.add(ball);
     }
     
+    /**
+     * Implementación del método mouseDragged de la interfaz MouseMotionListener
+     * @param event 
+     */
     @Override
-    public void mouseDragged(MouseEvent event) { // Implementación del método mouseDragged de la interfaz MouseMovementListener
-        // No tiene utilidad pero necesita ser creado para implementar correctamente la interfaz MouseMovementListener
+    public void mouseDragged(MouseEvent event) {
+        // No tiene utilidad pero necesita ser creado para implementar correctamente la interfaz MouseMotionListener
     }
 
+    /**
+     * Implementación del método mouseMoved de la interfaz MouseMotionListener
+     * @param event 
+     */
     @Override
-    public void mouseMoved(MouseEvent event) { // Implementación del método mouseMoved de la interfaz MouseMovementListener
+    public void mouseMoved(MouseEvent event) { 
         mousePosition.setX(event.getX()); // Cuando se mueve el ratón cambia las posiciones del vector mousePosition
         mousePosition.setY(event.getY());
     }
