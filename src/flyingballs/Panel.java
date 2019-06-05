@@ -1,3 +1,7 @@
+/**
+ *
+ * @authors Korn, Andreas Manuel & García Socias, Alberto
+ */
 package flyingballs;
 
 import java.awt.BasicStroke;
@@ -8,171 +12,81 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
-/**
- *
- * @authors Korn, Andreas Manuel & García Socias, Alberto
- */
-public class Panel extends JPanel implements MouseMotionListener {
+public class Panel extends JPanel implements MouseMotionListener { // Panel hereda de la clase JPanel e implementa la interfaz de MouseMotionListener
 
-    ArrayList<Ball> balls;
-    private final int WIDTH = 1000;
-    private final int HEIGHT = 500;
-    private int mouseX, mouseY;
-    private boolean walls;
-    private boolean followMouse;
+    ArrayList<Ball> balls; // Creación de un ArrayList de bolas para guardar los objetos bola que vayamos creando
+    private static final int WIDTH = 1000; // Indica la anchura del panel de bolas
+    private static final int HEIGHT = 500; // Indica la altura del panel de bolas
+    private Vector mousePosition = new Vector(0,0); // Indica la posición del cursero
+    private boolean walls; // Indica si los límites están activados en las opciones
+    private boolean followMouse; // Indica si el seguir ratón está activado en las opciones
 
-    public void setWalls(boolean walls) {
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public void setWalls(boolean walls) { // Cambia el valor de walls
         this.walls = walls;
     }
 
-    public void setFollowMouse(boolean followMouse) {
+    public void setFollowMouse(boolean followMouse) { // Cambia el valor de followMouse
         this.followMouse = followMouse;
     }
 
-    public Panel(int balls) {
-        this.followMouse = false;
+    public Panel(int balls) { // Constructor de la clase panel de bolas, requiere de un integer que serán en número de bolas con el que se empieza
+        this.followMouse = false; // Setea a la configuración básica (No seguir el ratón y rebotar contra las paredes)
         this.walls = true;
-        this.balls = new ArrayList<>();
-        addMouseMotionListener(this);
-        Ball ball;
-        for (int i = 0; i < balls; i++) {
+        this.balls = new ArrayList<>(); // Inicializa el Arraylist de bolas
+        addMouseMotionListener(this); // Añade el mouselistener
+        Ball ball; // Crea un objeto bola sin inicializar
+        for (int i = 0; i < balls; i++) { // Inizializa y añade en el array tantas bolas como tenga el int balls
             ball = new Ball();
             addBall(ball);
         }
     }
 
-    public void reset(int balls) {
-        this.balls.clear();
-        Ball ball;
-        for (int i = 0; i < balls; i++) {
+    public void reset(int balls) { // Resetea el panel de bolas, requiere de un integer que serán el nuevo número de bolas
+        this.balls.clear(); // Vacía el ArrayList
+        Ball ball; // Crea un objeto bola sin inicializar
+        for (int i = 0; i < balls; i++) { // Inizializa y aññade en el array tantas bolas como tenga el int balls
             ball = new Ball();
             addBall(ball);
         }
     }
 
     @Override
-    public void paint(Graphics graph) {
-        super.paint(graph);
-        Graphics2D g2 = (Graphics2D) graph;
-        g2.setStroke(new BasicStroke(5.0f));
-        setSize(WIDTH, HEIGHT);
-        try {
+    public void paint(Graphics graph) { // Método sobreescrito de su clase padre JPanel, este método se encarga de pintar las bolas
+        super.paint(graph); // Usamos el super para que haga un repaint como haría la clase paint de JPanel
+        Graphics2D g2 = (Graphics2D) graph; // Y le añadimos nuestras funcionalidades extra
+        g2.setStroke(new BasicStroke(5)); // Ajustamos el tamaño de trazo
+        setSize(WIDTH, HEIGHT); // Ajustamos las dimensiones del panel
+        try { // Por cada bola en el ArrayList de bolas, llamamos al método paintBall de ese objeto bola
             for (Ball ball : balls) {
                 ball.paintBall(graph);
+                ball.move(walls, followMouse, mousePosition); // Aprovecha el bucle para actualizar las posiciones de las bolas
             }
         } catch (Exception exception) {
-            System.err.println("Be careful playing with so many balls");
+            System.err.println("Be careful playing with so many balls"); // Al haber muchas bolas empezarán a fallar, esto avisa por consola que deberíamos considerar dejar de poner tantas bolas
         }
 
     }
 
-    public void move() {
-        for (Ball ball : balls) {
-            if (walls && !followMouse) {
-                moveWallsNotFollow(ball);
-            }
-            if (!walls && !followMouse){
-                moveNotWallsNotFollow(ball);
-            }
-            if(!walls && followMouse){
-                moveNotWallsFollow(ball);
-            }
-            if(walls && followMouse){
-                moveWallsFollow(ball);
-            }
-        }
-    }
-
-    private void moveWallsNotFollow(Ball ball) {
-        ball.setAcceleration(0,1);
-        
-        if(ball.getSpeed().getX() < 0.5 && ball.getSpeed().getX() > -0.5){
-            ball.getSpeed().setX(0.5); // A veces la velocidad en el eje X es tan pequeña, que la bola parece que no se mueve. Esto se asegura de que sí lo haga.
-        }
-        
-        if(ball.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
-            ball.setSpeed(5,0);
-        } else if (ball.getPosition().getX() + ball.getDiameter() >= WIDTH){ // Cuando la bola llega a la pared derecha
-            ball.setSpeed(-5,0);
-        } 
-        if(ball.getPosition().getY() <= 0){ // Cuando la bola llega al techo
-            ball.setSpeed(0, 5);
-        } else if (ball.getPosition().getY() + ball.getDiameter() >= HEIGHT){ // Cuando la bola llega abajo
-            ball.setSpeed(0, -5);
-        }
-        ball.accelerate();
-        ball.getSpeed().limitate(20);
-        ball.getPosition().add(ball.getSpeed());
-    }
-    
-    private void moveNotWallsNotFollow(Ball ball) {
-        ball.setAcceleration(0,1);
-
-        if(ball.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
-            ball.setPosition(WIDTH - ball.getDiameter(), ball.getPosition().getY());
-        } else if (ball.getPosition().getX() + ball.getDiameter() >= WIDTH){ // Cuando la bola llega a la pared derecha
-            ball.setPosition(0, ball.getPosition().getY());
-        } 
-        if(ball.getPosition().getY() < 0){ // Cuando la bola llega al techo
-            ball.setPosition(ball.getPosition().getX(), HEIGHT - ball.getDiameter());
-        } else if (ball.getPosition().getY() + ball.getDiameter() >= HEIGHT){ // Cuando la bola llega abajo
-            ball.setPosition(ball.getPosition().getX(), 0);
-        }
-        ball.accelerate();
-        ball.getSpeed().limitate(10);
-        ball.getPosition().add(ball.getSpeed());
-    }
-    
-    private void moveNotWallsFollow(Ball ball){
-        if(ball.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
-            ball.setPosition(WIDTH - ball.getDiameter(), ball.getPosition().getY());
-        } else if (ball.getPosition().getX() + ball.getDiameter() >= WIDTH){ // Cuando la bola llega a la pared derecha
-            ball.setPosition(0, ball.getPosition().getY());
-        } 
-        if(ball.getPosition().getY() < 0){ // Cuando la bola llega al techo
-            ball.setPosition(ball.getPosition().getX(), HEIGHT - ball.getDiameter());
-        } else if (ball.getPosition().getY() + ball.getDiameter() >= HEIGHT){ // Cuando la bola llega abajo
-            ball.setPosition(ball.getPosition().getX(), 0);
-        }
-        
-        ball.setAcceleration((mouseX-ball.getPosition().getX())/(2*WIDTH),(mouseY-ball.getPosition().getY())/(2*HEIGHT));
-        
-        ball.getSpeed().limitate(5);
-        ball.accelerate();
-        ball.getPosition().add(ball.getSpeed());
-    }
-    
-    private void moveWallsFollow(Ball ball){
-        if(ball.getPosition().getX() <= 0){ // Cuando la bola llega a la pared izquierda
-            ball.setSpeed(1,0);
-        } else if (ball.getPosition().getX() + ball.getDiameter() >= WIDTH){ // Cuando la bola llega a la pared derecha
-            ball.setSpeed(-1,0);
-        } else if(ball.getPosition().getY() <= 0){ // Cuando la bola llega al techo
-            ball.setSpeed(0, 1);
-        } else if (ball.getPosition().getY() + ball.getDiameter() >= HEIGHT){ // Cuando la bola llega abajo
-            ball.setSpeed(0, -1);
-        }
-        
-        ball.setAcceleration((mouseX-ball.getPosition().getX())/(2*WIDTH),(mouseY-ball.getPosition().getY())/(2*HEIGHT));
-
-        ball.accelerate();
-        ball.getSpeed().limitate(5);
-        ball.getPosition().add(ball.getSpeed());
-    }
-    
-    public void addBall(Ball ball) {
+    public void addBall(Ball ball) { // Añade un objeto bola al ArrayList de bolas
         balls.add(ball);
     }
     
     @Override
-    public void mouseDragged(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
+    public void mouseDragged(MouseEvent event) { // Implementación del método mouseDragged de la interfaz MouseMovementListener
+        // No tiene utilidad pero necesita ser creado para implementar correctamente la interfaz MouseMovementListener
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
+    public void mouseMoved(MouseEvent event) { // Implementación del método mouseMoved de la interfaz MouseMovementListener
+        mousePosition.setX(event.getX()); // Cuando se mueve el ratón cambia las posiciones del vector mousePosition
+        mousePosition.setY(event.getY());
     }
 }
