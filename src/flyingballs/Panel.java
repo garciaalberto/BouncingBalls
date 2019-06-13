@@ -93,7 +93,7 @@ public class Panel extends JPanel implements MouseMotionListener { // Panel here
         }
     }
     
-    public void actualizateBallsPosition(){
+    public void updateBallsPosition(){
         for (Ball ball : balls) {
             ball.move(walls, followMouse, mousePosition); // Actualiza las posiciones de las bolas
         }
