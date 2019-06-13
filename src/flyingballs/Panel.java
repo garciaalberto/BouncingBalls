@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class Panel extends JPanel implements MouseMotionListener { // Panel hereda de la clase JPanel e implementa la interfaz de MouseMotionListener
 
-    ArrayList<Ball> balls; // Creación de un ArrayList de bolas para guardar los objetos bola que vayamos creando
+    private ArrayList<Ball> balls; // Creación de un ArrayList de bolas para guardar los objetos bola que vayamos creando
     private static final int WIDTH = 1000; // Indica la anchura del panel de bolas
     private static final int HEIGHT = 500; // Indica la altura del panel de bolas
     private Vector mousePosition = new Vector(0,0); // Indica la posición del cursero
@@ -87,12 +87,20 @@ public class Panel extends JPanel implements MouseMotionListener { // Panel here
         try { // Por cada bola en el ArrayList de bolas, llamamos al método paintBall de ese objeto bola
             for (Ball ball : balls) {
                 ball.paintBall(graph);
-                ball.move(walls, followMouse, mousePosition); // Aprovecha el bucle para actualizar las posiciones de las bolas
             }
         } catch (Exception exception) {
             System.err.println("Be careful playing with so many balls"); // Al haber muchas bolas empezarán a fallar, esto avisa por consola que deberíamos considerar dejar de poner tantas bolas
         }
-
+    }
+    
+    public void actualizateBallsPosition(){
+        for (Ball ball : balls) {
+            ball.move(walls, followMouse, mousePosition); // Actualiza las posiciones de las bolas
+        }
+    }
+    
+    public void sleep() throws InterruptedException{
+        Thread.sleep(10); // Dejamos reposar por 10 microsegundos
     }
 
     /**

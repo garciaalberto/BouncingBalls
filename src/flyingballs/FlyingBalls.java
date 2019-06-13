@@ -29,7 +29,7 @@ public class FlyingBalls extends JFrame { // FlyingBalls hereda de la clase JFra
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra el programa cuando se cierra la ventana
     }
     
-    public static void main(String[] args) throws InterruptedException, BadLocationException {
+    public static void main(String[] args) throws BadLocationException, InterruptedException {
         
         Panel panel = new Panel(2); // Crea un nuevo panel con las dos bolas
         
@@ -57,7 +57,8 @@ public class FlyingBalls extends JFrame { // FlyingBalls hereda de la clase JFra
         
         while(true){
             panel.repaint(); // Hacemos un repaint de las bolas en sus nuevas posiciones
-            Thread.sleep(10); // Dejamos reposar por 10 microsegundos
+            panel.actualizateBallsPosition(); // Calcula la nueva posición de las bolas
+            panel.sleep(); // Reposamos el panel por 10 microsegundos
             panel.setWalls(walls.isSelected()); // Damos a walls el valor que tenía anteriormente
             panel.setFollowMouse(followMouse.isSelected()); // Damos a followMouse el valor que tenía anteriormente
             try{
