@@ -55,22 +55,6 @@ public class FlyingBalls extends JFrame { // FlyingBalls hereda de la clase JFra
         
         new FlyingBalls(panel, optionsMenu).setVisible(true); // Creacion del JFrame con los dos paneles
         
-        while(true){
-            panel.repaint(); // Hacemos un repaint de las bolas en sus nuevas posiciones
-            panel.updateBallsPosition(); // Calcula la nueva posición de las bolas
-            panel.sleep(); // Reposamos el panel por 10 microsegundos
-            panel.setWalls(walls.isSelected()); // Damos a walls el valor que tenía anteriormente
-            panel.setFollowMouse(followMouse.isSelected()); // Damos a followMouse el valor que tenía anteriormente
-            try{
-                if(Integer.parseInt(numberOfBalls.getText())!= balls){ // Si el número de bolas del panel de opciones no coincide con las bolas que teníamos antes
-                    balls = Integer.parseInt(numberOfBalls.getText()); // Cambiamos el nuevo número de bolas
-                    panel.reset(balls); // Reseteamos el panel con el nuevo número de bolas
-                }
-            }
-            catch(NumberFormatException exception){ // Si el input en el menú no es un número Integer
-                balls = 0; // Pasa a tener 0 bolas
-                panel.reset(balls); // Se resetea el panel con 0 bolas
-            }
-        }
+        panel.infiniteLoop(numberOfBalls, balls, walls, followMouse);
     }
 }

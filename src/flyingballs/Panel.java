@@ -10,7 +10,9 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Panel extends JPanel implements MouseMotionListener { // Panel hereda de la clase JPanel e implementa la interfaz de MouseMotionListener
 
@@ -99,8 +101,24 @@ public class Panel extends JPanel implements MouseMotionListener { // Panel here
         }
     }
     
-    public void sleep() throws InterruptedException{
-        Thread.sleep(10); // Dejamos reposar por 10 microsegundos
+    public void infiniteLoop(JTextField numberOfBalls, int numBalls, JCheckBox wallCheck, JCheckBox mouseCheck) throws InterruptedException {
+        while(true){
+            repaint(); // Hacemos un repaint de las bolas en sus nuevas posiciones
+            updateBallsPosition(); // Calcula la nueva posición de las bolas
+            Thread.sleep(10); // Reposamos el panel por 10 microsegundos
+            setWalls(wallCheck.isSelected()); // Damos a walls el valor que tenía anteriormente
+            setFollowMouse(mouseCheck.isSelected()); // Damos a followMouse el valor que tenía anteriormente
+            try{
+                if(Integer.parseInt(numberOfBalls.getText()) != numBalls){ // Si el número de bolas del panel de opciones no coincide con las bolas que teníamos antes
+                    numBalls = Integer.parseInt(numberOfBalls.getText()); // Cambiamos el nuevo número de bolas
+                    reset(numBalls); // Reseteamos el panel con el nuevo número de bolas
+                }
+            }
+            catch(NumberFormatException exception){ // Si el input en el menú no es un número Integer
+                numBalls = 0; // Pasa a tener 0 bolas
+                reset(numBalls); // Se resetea el panel con 0 bolas
+            }
+        }
     }
 
     /**
